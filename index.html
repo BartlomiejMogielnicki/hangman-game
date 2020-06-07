@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Hangman Game</title>
+</head>
+
+<body>
+    <h1>Hangman</h1>
+    <p>Find the hidden word - Enter a letter</p>
+    <script src="app.js"></script>
+
+    <div class="figure-container">
+        <svg width="400px" height="400px">
+            <line x1="40" y1="20" x2="40" y2="220" />
+            <line x1="40" y1="20" x2="120" y2="20" />
+            <line x1="120" y1="20" x2="120" y2="60" />
+            <line x1="0" y1="220" x2="80" y2="220" />
+
+            <circle cx="120" cy="80" r="20" />
+            <line x1="120" y1="100" x2="120" y2="140" class="line" />
+            <line x1="100" y1="130" x2="120" y2="110" class="line" />
+            <line x1="140" y1="130" x2="120" y2="110" class="line" />
+            <line x1="100" y1="170" x2="120" y2="140" class="line" />
+            <line x1="120" y1="140" x2="140" y2="170" class="line" />
+        </svg>
+    </div>
+
+    <div class="incorrect-letter-container">
+        <div class="incorrect-letter">
+            <p>Incorrect letters:</p>
+            <span>a, b, c, d</span>
+        </div>
+    </div>
+
+    <div class="correct-letter-container">
+        <div class="correct-letter">
+            <span>a</span>
+            <span>b</span>
+            <span>c</span>
+            <span>d</span>
+            <span>e</span>
+            <span>f</span>
+        </div>
+    </div>
+
+    <div class="message">
+        <p>You tried this letter before</p>
+    </div>
+
+
+</body>
+
+</html>
