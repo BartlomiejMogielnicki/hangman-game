@@ -9,9 +9,8 @@
 </head>
 
 <body>
-    <h1>Hangman</h1>
-    <p>Find the hidden word - Enter a letter</p>
-    <script src="app.js"></script>
+    <h1 class="title">Hangman</h1>
+    <p class="description">Find the hidden word - Enter a letter</p>
 
     <div class="figure-container">
         <svg width="400px" height="400px">
@@ -51,7 +50,14 @@
         <p>You tried this letter before</p>
     </div>
 
+    <div class="popup-container">
+        <div class="popup">
+            <p class="popup-message">You lost.</p>
+            <button class="popup-btn">Play Again</button>
+        </div>
+    </div>
 
+    <script src="app.js"></script>
 </body>
 
 </html>
