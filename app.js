@@ -1,4 +1,4 @@
-const line = document.querySelectorAll('.line');
+const lines = document.querySelectorAll('.line');
 const correct = document.getElementById('correct-letter');
 const incorrect = document.getElementById('incorrect-letter');
 const message = document.getElementById('message-container');
@@ -6,21 +6,13 @@ const popup = document.getElementById('popup-container');
 const popupMsg = document.getElementById('popup-message');
 const playAgainBtn = document.getElementById('popup-btn');
 
-// Choose password
+// Random password from given array
 const passwordArr = ['programming', 'javascript', 'html', 'computer'];
-const password = passwordArr[Math.floor(Math.random() * passwordArr.length)]
+let password = passwordArr[Math.floor(Math.random() * passwordArr.length)]
 
+// Define empty arrays for letters
 const correctLetters = [];
 const incorrectLetters = [];
-
-
-// Check win
-const checkWin = () => {
-    if (correctLetters.length === password.length) {
-        popupMsg.textContent = "You win!";
-        popup.style.display = 'flex';
-    }
-}
 
 // Show incorrect letters
 const showIncorrect = () => {
@@ -33,11 +25,13 @@ const showPassword = () => {
     `<span>${correctLetters.includes(letter) ? letter : ''}
     </span>`).join('')}`;
 
-    checkWin();
+    // Check win
+    if (correct.innerText.length === password.length) {
+        popupMsg.textContent = "You win!";
+        popup.style.display = 'flex';
+    }
     showIncorrect();
 }
-
-showPassword();
 
 // Show message
 const showMessage = () => {
@@ -48,12 +42,34 @@ const showMessage = () => {
     }, 2000);
 }
 
+// Check lose
+const checkLose = () => {
+    if (incorrectLetters.length === lines.length) {
+        popupMsg.textContent = "You lose!";
+        popup.style.display = 'flex';
+    }
+}
+
 // Incorrect update
-const incorrectUpdate = (letter) =>
-    incorrectLetters.push(letter);
+const incorrectUpdate = (letter) => {
+    if (incorrectLetters.includes(letter)) {
+        message.textContent = 'You tried this letter before.';
+        showMessage();
+    } else {
+        incorrectLetters.push(letter);
 
-const errors = incorrectLetters.length;
-
+        // Show next line
+        const errors = incorrectLetters.length;
+        lines.forEach((line, index) => {
+            if (index < errors) {
+                line.style.display = "block";
+            } else {
+                line.style.display = "none";
+            }
+        })
+    }
+    checkLose();
+}
 
 // Type letters
 document.addEventListener('keydown', (e) => {
@@ -69,3 +85,17 @@ document.addEventListener('keydown', (e) => {
     }
     showPassword();
 })
+
+// Play again button - restart game
+playAgainBtn.addEventListener('click', () => {
+    password = passwordArr[Math.floor(Math.random() * passwordArr.length)]
+    correctLetters.splice(0);
+    incorrectLetters.splice(0);
+    showPassword();
+    popup.style.display = 'none';
+    lines.forEach(line => {
+        line.style.display = "none";
+    })
+})
+
+showPassword();
